@@ -21,12 +21,27 @@ public class ContactsPage extends BasePage {
         driver.get(url);
     }
 
-    public void createContact(String lastName) {
-        new Input(driver, "Last Name").write(lastName);
+    public void createContact() {
+        new Input(driver, "Last Name").write("Petrikov");
+        new Input(driver, "First Name").write("Petr");
+        new DropDown(driver, "Salutation").choseSalutation("Dr.");
+        new Input(driver, "Title").write("My title");
+        new Input(driver, "Phone").write("+375291112233");
+        new Input(driver, "Mobile").write("+375291112233");
+        new Input(driver, "Email").write("test@test.test");
         new LookUp(driver, "Account Name").select("ABBB");
         new TextArea(driver, "Mailing Street").write("MINSK 123");
         new TextArea(driver, "Other Street").write("MOSCOW 456");
-        new DropDown(driver).choseSalutation("Dr.");
-        //new DropDown(driver, "Lead Source").choseSalutation("In-Store");
+        new Input(driver, "Mailing City").write("Minsk");
+        new Input(driver, "Mailing Zip/Postal Code").write("220000");
+        new Input(driver, "Mailing Country").write("Minsk");
+        new Input(driver, "Fax").write("123456");
+        new Input(driver, "Other Phone").write("+25555555");
+        new Input(driver, "Asst. Phone").write("+01236546854");
+        new Input(driver, "Assistant").write("Assist123");
+        new Input(driver, "Department").write("QA");
+        new DropDown(driver, "Lead Source").choseSalutation("In-Store");
+        new Input(driver, "Birthdate").write("01.01.1990");
+        new TextArea(driver, "Description").write("My description");
     }
 }

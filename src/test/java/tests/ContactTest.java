@@ -9,15 +9,13 @@ public class ContactTest extends BaseTest{
 
     @Test
     public void createContact() {
-
         loginPage.open();
         contactsPage.openContacts();
         loginPage.login(login, password);
         loginPage.loginClick();
 
-
         contactsPage.openContacts();
-        contactsPage.createContact("Lastname");
+        contactsPage.createContact();
 
         driver.quit();
     }
