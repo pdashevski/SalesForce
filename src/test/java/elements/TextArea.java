@@ -1,13 +1,16 @@
+package elements;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class Input {
+public class TextArea {
 
     WebDriver driver;
-    String label;
-    String locator = "//*[contains(text(),'%s')]/ancestor::div[contains(@class,'uiInput')]//input";
 
-    public Input(WebDriver driver, String label) {
+    String label;
+    String locator = "//div[contains(@class,'isModal')]//span[contains(text(),'%s')]/../..//textarea";
+
+    public TextArea(WebDriver driver, String label) {
         this.driver = driver;
         this.label = label;
     }
