@@ -8,9 +8,6 @@ import org.testng.annotations.Test;
 
 public class ContactTest extends BaseTest {
 
-    String login = "paveldashevski-pzpr@force.com";
-    String password = "552478Lil9";
-
     @Test(description = "Creation of contact")
     @Description("Some detailed test description")
     @Link("https://github.com/pdashevski")
@@ -18,8 +15,7 @@ public class ContactTest extends BaseTest {
     @TmsLink("COVID-100009")
     public void createContact() {
         loginPage.open();
-        loginPage.login(login, password);
-        loginPage.loginClick();
+        loginPage.login();
         contactsPage.openNewContacts();
 
         Contact contact = new Contact(
@@ -45,8 +41,8 @@ public class ContactTest extends BaseTest {
 
         contactsPage.createContact(contact);
         driver.findElement(By.xpath("//*[contains(@class,'slds-float_right')]/..//..//span[text()='Save']")).click();
-        //contactsPage.isContactAddedWait(contact.getLastName());
         contactsPage.openContactPage();
+        contactsPage.spinnerWait();
 
         Assert.assertTrue(contactsPage.validateContact(contact, contact.getLastName()));
     }

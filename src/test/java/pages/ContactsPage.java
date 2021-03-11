@@ -15,7 +15,7 @@ import org.testng.Assert;
 public class ContactsPage extends BasePage {
 
     public static final String LASTNAME = "//*[contains(@class,'listViewContent')]//span//a[text()='%s']";
-    public static final String NAME_TITLE = "//span[contains(text(),'%s')]";
+    public static final By SPINNER = By.xpath("//*[contains(@class,'slds-spinner_container slds-grid slds-hide')]");
     String url = "https://abcdef7.lightning.force.com/lightning/o/Contact/" +
             "new?count=2&nooverride=1&useRecordTypeCheck=1&navigationLocation=" +
             "MRU_LIST&backgroundContext=%2Flightning%2Fo%2FContact%2Flist%3FfilterName%3DRecent";
@@ -62,9 +62,9 @@ public class ContactsPage extends BasePage {
         return driver.findElement(By.xpath(String.format(LASTNAME, lastName))).getText().equals(contact.getLastName());
     }
 
-    public void isContactAddedWait(String text) {
+    public void spinnerWait() {
         try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated((By) driver.findElement(By.xpath(String.format(NAME_TITLE, text)))));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(SPINNER));
         } catch (Exception e) {
             Assert.fail("Contact list is not loaded");
         }
