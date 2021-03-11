@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class ContactTest extends BaseTest {
 
     @Test(description = "Creation of contact")
@@ -13,7 +15,7 @@ public class ContactTest extends BaseTest {
     @Link("https://github.com/pdashevski")
     @Issue("COVID-19")
     @TmsLink("COVID-100009")
-    public void createContact() {
+    public void createContact() throws IOException {
         loginPage.open();
         loginPage.login();
         contactsPage.openNewContacts();
@@ -42,6 +44,7 @@ public class ContactTest extends BaseTest {
         contactsPage.createContact(contact);
         driver.findElement(By.xpath("//*[contains(@class,'slds-float_right')]/..//..//span[text()='Save']")).click();
         contactsPage.openContactPage();
+        contactsPage.networkThrotting(); //network thrott for testing WAIT
         contactsPage.spinnerWait();
 
         Assert.assertTrue(contactsPage.validateContact(contact, contact.getLastName()));

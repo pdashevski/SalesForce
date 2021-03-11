@@ -1,5 +1,6 @@
 package pages;
 
+import com.google.common.collect.ImmutableMap;
 import elements.DropDown;
 import elements.LookUp;
 import elements.TextArea;
@@ -8,14 +9,22 @@ import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import elements.Input;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.Command;
+import org.openqa.selenium.remote.CommandExecutor;
+import org.openqa.selenium.remote.Response;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ContactsPage extends BasePage {
 
     public static final String LASTNAME = "//*[contains(@class,'listViewContent')]//span//a[text()='%s']";
-    public static final By SPINNER = By.xpath("//*[contains(@class,'slds-spinner_container slds-grid slds-hide')]");
+    public static final By SPINNER = By.xpath("//*[contains(@class,'windowViewMode-maximized')]");
     String url = "https://abcdef7.lightning.force.com/lightning/o/Contact/" +
             "new?count=2&nooverride=1&useRecordTypeCheck=1&navigationLocation=" +
             "MRU_LIST&backgroundContext=%2Flightning%2Fo%2FContact%2Flist%3FfilterName%3DRecent";
@@ -68,5 +77,19 @@ public class ContactsPage extends BasePage {
         } catch (Exception e) {
             Assert.fail("Contact list is not loaded");
         }
+    }
+
+    public void networkThrotting() throws IOException {
+        Map map = new HashMap();
+        map.put("offline", false);
+        map.put("latency", 5);
+        map.put("download_throughput", 5000);
+        map.put("upload_throughput", 5000);
+
+
+        CommandExecutor executor = ((ChromeDriver)driver).getCommandExecutor();
+        Response response = executor.execute(
+                new Command(((ChromeDriver)driver).getSessionId(),    "setNetworkConditions", ImmutableMap.of("network_conditions", ImmutableMap.copyOf(map)))
+        );
     }
 }
