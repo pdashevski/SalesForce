@@ -8,6 +8,7 @@ public class LookUp {
     WebDriver driver;
     String label;
     String locator = "//*[contains(text(),'%s')]/ancestor::div[contains(@class,'uiInput')]//input";
+    String selectOption = "//*[@class='listContent']//ancestor::*[@title='%s']";
 
     public LookUp(WebDriver driver, String label) {
         this.driver = driver;
@@ -16,6 +17,7 @@ public class LookUp {
 
     public void select(String text) {
         driver.findElement(By.xpath(String.format(locator, label))).sendKeys(text);
+        driver.findElement(By.xpath(String.format(selectOption, text))).click();
     }
-    //*[@class='listContent']//ancestor::*[@title='ABBB']
+
 }
