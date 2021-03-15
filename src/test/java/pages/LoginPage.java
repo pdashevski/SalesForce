@@ -11,7 +11,7 @@ public class LoginPage extends BasePage {
     public static final String URL = "https://abcdef7.my.salesforce.com";
     public static final String login = "paveldashevski-pzpr@force.com";
     public static final String password = "552478Lil9";
-    public static final By HEADER_AD = By.xpath("//*[@class='trial-tours']");
+
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -31,14 +31,5 @@ public class LoginPage extends BasePage {
         driver.findElement(LOGIN_BUTTON).click();
     }
 
-    public boolean isSuccessfullLogin() {
-        boolean isOpened;
-        try {
-            driver.findElement(HEADER_AD);
-            isOpened = true;
-        } catch (Exception ex) {
-            isOpened = false;
-        }
-        return isOpened;
-    }
+
 }
