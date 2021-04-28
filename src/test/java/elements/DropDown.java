@@ -7,8 +7,8 @@ public class DropDown {
 
     WebDriver driver;
     String label;
-    String locator = "//*[contains(text(), '%s')]/ancestor::div[contains(@class,'uiInputSelect ')]//a";
-    String selectOption = "//*[contains(@class, 'select-options')]/descendant::a[contains(text(),'%s')]";
+    String locator = "//*[contains(text(),'%s')]/ancestor::lightning-picklist//input";
+    String selectOption = "//*[text()='%s']";
 
     public DropDown(WebDriver driver, String label) {
         this.driver = driver;

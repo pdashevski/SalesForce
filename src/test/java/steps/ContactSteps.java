@@ -17,9 +17,14 @@ public class ContactSteps {
     public void create(Contact contact) {
         ContactListPage contactListPage = new ContactListPage(driver);
         contactListPage.open();
+        contactListPage.isContactPageOpened();
         contactListPage.clickNew();
+
         NewContactModal newContactModal = new NewContactModal(driver);
         newContactModal.createContact(contact);
         newContactModal.save();
+        //contactListPage.isContactPageOpened();
+        //contactListPage.open();
+        //contactListPage.validateContact(contact, contact.getLastName());
     }
 }

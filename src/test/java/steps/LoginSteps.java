@@ -13,17 +13,11 @@ public class LoginSteps {
         this.driver = driver;
     }
 
-    //login
     @Step("Login by '{user}'")
-    public void login() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.login();
-        Assert.assertTrue(new MainPage(driver).isSuccessfullLogin(), "Page was not opened");
-    }
-
-    @Step("Open login page")
-    public void open() {
+    public void login(String userName, String password) {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
+        loginPage.login(userName, password);
+        Assert.assertTrue(new MainPage(driver).isSuccessfullLogin(), "Main Page was not opened");
     }
 }

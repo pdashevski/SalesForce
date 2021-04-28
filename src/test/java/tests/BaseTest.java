@@ -8,9 +8,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.ContactListPage;
-import pages.ContactsPage;
 import pages.LoginPage;
 import pages.NewContactModal;
+import steps.AccountSteps;
 import steps.ContactSteps;
 import steps.LoginSteps;
 import tests.base.TestListener;
@@ -22,11 +22,11 @@ public class BaseTest {
 
     WebDriver driver;
     LoginPage loginPage;
-    //ContactsPage contactsPage;
     NewContactModal newContactModal;
     ContactListPage contactListPage;
     LoginSteps loginSteps;
     ContactSteps contactSteps;
+    AccountSteps accountSteps;
 
     @BeforeMethod(description = "Browser opening")
     public void setup(ITestContext context) {
@@ -39,11 +39,12 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
-        //contactsPage = new ContactsPage(driver);
+
         newContactModal = new NewContactModal(driver);
         contactListPage = new ContactListPage(driver);
         loginSteps = new LoginSteps(driver);
         contactSteps = new ContactSteps(driver);
+        accountSteps = new AccountSteps(driver);
 
         context.setAttribute("driver", driver);
     }
