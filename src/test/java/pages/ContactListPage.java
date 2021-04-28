@@ -1,25 +1,16 @@
 package pages;
 
-import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Step;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.Command;
-import org.openqa.selenium.remote.CommandExecutor;
-import org.openqa.selenium.remote.Response;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ContactListPage extends BasePage {
     public static final By NEW_BUTTON = By.cssSelector("[title=New]");
     public static final By SPINNER = By.xpath("//*[contains(@class,'windowViewMode-maximized')]");
-    public static final String LASTNAME = "//*[contains(@class,'listViewContent')]//span//a[text()='%s']";
+    public static final String LASTNAME = "//*[@class='custom-truncate uiOutputText']";
 
     public ContactListPage(WebDriver driver) {
         super(driver);
@@ -35,29 +26,17 @@ public class ContactListPage extends BasePage {
         driver.findElement(NEW_BUTTON).click();
     }
 
-    public void spinnerWait() {
+    @Step("Contact list loading wait")
+    public void isContactPageOpened() {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(SPINNER));
-        } catch (Exception e) {
-            Assert.fail("Contact list is not loaded");
+        } catch (Exception ex) {
+            Assert.fail("Страница контактов не была загружена");
         }
     }
 
+    @Step("Validation of created contact")
     public boolean validateContact(Contact contact, String lastName) {
         return driver.findElement(By.xpath(String.format(LASTNAME, lastName))).getText().equals(contact.getLastName());
-    }
-
-    public void networkThrotting() throws IOException {
-        Map map = new HashMap();
-        map.put("offline", false);
-        map.put("latency", 5);
-        map.put("download_throughput", 5000);
-        map.put("upload_throughput", 5000);
-
-
-        CommandExecutor executor = ((ChromeDriver) driver).getCommandExecutor();
-        Response response = executor.execute(
-                new Command(((ChromeDriver) driver).getSessionId(), "setNetworkConditions", ImmutableMap.of("network_conditions", ImmutableMap.copyOf(map)))
-        );
     }
 }

@@ -7,7 +7,7 @@ public class Input {
 
     WebDriver driver;
     String label;
-    String locator = "//*[contains(text(),'%s')]/ancestor::div[contains(@class,'uiInput')]//input";
+    String locator = "//*[contains(text(), '%s')]//ancestor::lightning-input//input";
 
     public Input(WebDriver driver, String label) {
         this.driver = driver;

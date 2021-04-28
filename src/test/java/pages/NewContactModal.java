@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 
 public class NewContactModal extends BasePage {
 
-    public static final By SAVE_BUTTON = By.xpath("//*[contains(@class,'slds-float_right')]/..//..//span[text()='Save']");
+    public static final By SAVE_BUTTON = By.xpath("//*[@name='SaveEdit']");
 
     public NewContactModal(WebDriver driver) {
         super(driver);
@@ -20,7 +20,6 @@ public class NewContactModal extends BasePage {
     @Step("Creating contact: {contact.lastName}")
     public void createContact(Contact contact) {
         new Input(driver, "Last Name").write(contact.getLastName());
-        //new Input(driver, "First Name").write(contact.getFirstName());
         new DropDown(driver, "Salutation").choseSalutation(contact.getSalutation());
         new Input(driver, "Title").write(contact.getTitle());
         new Input(driver, "Phone").write(contact.getPhone());
@@ -38,10 +37,10 @@ public class NewContactModal extends BasePage {
         new Input(driver, "Assistant").write(contact.getAssistant());
         new Input(driver, "Department").write(contact.getDepartment());
         new DropDown(driver, "Lead Source").choseSalutation(contact.getLeadSource());
-        //new Input(driver, "Birthdate").write(contact.getBirthDate());
         new TextArea(driver, "Description").write(contact.getDescription());
     }
 
+    @Step("Click [Save] button")
     public void save() {
         driver.findElement(SAVE_BUTTON).click();
     }

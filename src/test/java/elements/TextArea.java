@@ -8,7 +8,7 @@ public class TextArea {
     WebDriver driver;
 
     String label;
-    String locator = "//div[contains(@class,'isModal')]//span[contains(text(),'%s')]/../..//textarea";
+    String locator = "//*[contains(text(), '%s')]//ancestor::lightning-textarea//textarea";
 
     public TextArea(WebDriver driver, String label) {
         this.driver = driver;

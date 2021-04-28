@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class MainPage extends BasePage{
 
-    public static final By HEADER_AD = By.xpath("//*[@class='trial-tours']");
+    public static final By HEADER_AD = By.xpath("//*[@class='trial-tours']"); //By.cssSelector(".oneTrialHeader");
 
     public MainPage(WebDriver driver) {
         super(driver);

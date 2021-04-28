@@ -2,9 +2,13 @@ package tests;
 
 import io.qameta.allure.*;
 import models.Contact;
+import models.ContactFactory;
 import org.testng.annotations.Test;
 
 public class ContactTest extends BaseTest {
+
+    String login = "paveldashevski-pzpr@force.com";
+    String password = "552478Lil9";
 
     /*@Test(description = "Creation of contact")
     @Description("Some detailed test description")
@@ -48,13 +52,8 @@ public class ContactTest extends BaseTest {
     }*/
 
     @Test(description = "Creation of contact")
-    @Description("Some detailed test description")
-    @Link("https://github.com/pdashevski")
-    @Issue("COVID-19")
-    @TmsLink("COVID-100009")
-    public void createContact1() {
-        loginSteps.open();
-        loginSteps.login();
+    public void createContact() {
+        loginSteps.login(login, password);
         Contact contact = new Contact("Petrikov",
                 "Mr.",
                 "Petrikov title is here",
@@ -75,7 +74,11 @@ public class ContactTest extends BaseTest {
                 "Petrikov's description",
                 "+375291112233");
         contactSteps.create(contact);
+    }
 
+    @Test
+    public void bla() {
+        System.out.println(ContactFactory.get());
     }
 
 }
